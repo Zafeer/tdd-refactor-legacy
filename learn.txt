@@ -1,0 +1,8 @@
+To install jest globally : npm install jest --global
+npm init
+npm install -D typescript jest ts-jest @types/jest
+npx ts-jest (config)
+
+> jest
+
+To open in vscode code.

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { stringCalculator } from '../string-calculator';
+import { stringCalculator } from './string-calculator';
 
 describe('string-calculator', () => {
   describe('add', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createRockPaperScissors, Move, Outcome } from '../rock-paper-scissors';
+import { createRockPaperScissors, Move, Outcome } from './rock-paper-scissors';
 
 describe('rock-paper-scissors', () => {
   describe('play', () => {

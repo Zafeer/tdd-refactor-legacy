@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { areDigitsEven } from '../even-digits';
+import { areDigitsEven } from './even-digits';
 
 describe('even-digit', () => {
   describe('one-digit', () => {

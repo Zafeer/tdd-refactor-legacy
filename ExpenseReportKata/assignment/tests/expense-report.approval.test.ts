@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { printReport, Expense } from '../app/expense-report';
 
 // Helper function to capture stdout
@@ -17,7 +17,7 @@ function captureStdout(callback: () => void): string {
   return output;
 }
 
-describe('Expense Report - Plain Text', () => {
+describe('Expense Report - Approval Tests', () => {
   it('should generate a plain text report with sample expenses', () => {
     const expenses: Expense[] = [
       { type: 'dinner', amount: 4500 },
@@ -39,9 +39,7 @@ describe('Expense Report - Plain Text', () => {
 
     expect(normalizedOutput).toMatchSnapshot(); // Approve the output manually on first run
   });
-});
 
-describe('Expense Report - HTML', () => {
   it('should generate an HTML report with sample expenses', () => {
     const expenses: Expense[] = [
       { type: 'dinner', amount: 4500 },
@@ -62,5 +60,40 @@ describe('Expense Report - HTML', () => {
     );
 
     expect(normalizedOutput).toMatchSnapshot(); // Approve the output manually on first run
+  });
+
+  //Using spy
+  it('should generate plain text report correctly using spy', () => {
+    const mockStdoutWrite = vi
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true);
+
+    const expenses: Expense[] = [
+      new Expense('dinner', 3000),
+      new Expense('breakfast', 500),
+      new Expense('car-rental', 10000),
+    ];
+
+    printReport(false, expenses);
+
+    expect(mockStdoutWrite.mock.calls.join('')).toMatchSnapshot();
+    mockStdoutWrite.mockRestore();
+  });
+
+  it('should generate HTML report correctly using spy', () => {
+    const mockStdoutWrite = vi
+      .spyOn(process.stdout, 'write')
+      .mockImplementation(() => true);
+
+    const expenses: Expense[] = [
+      new Expense('dinner', 3000),
+      new Expense('breakfast', 500),
+      new Expense('car-rental', 10000),
+    ];
+
+    printReport(true, expenses);
+
+    expect(mockStdoutWrite.mock.calls.join('')).toMatchSnapshot();
+    mockStdoutWrite.mockRestore();
   });
 });

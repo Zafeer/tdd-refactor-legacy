@@ -1,6 +1,43 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Expense Report - HTML > should generate an HTML report with sample expenses 1`] = `
+exports[`Expense Report - Approval Tests > should generate HTML report correctly using spy 1`] = `
+"<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Report: 2025-01-15</title>
+</head>
+<body>
+<h1>Expense Report: 2025-01-15</h1>
+<table>
+<thead>
+<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
+</thead>
+<tbody>
+<tr><td>Dinner</td><td>3000</td><td> </td></tr>
+<tr><td>Breakfast</td><td>500</td><td> </td></tr>
+<tr><td>Car Rental</td><td>10000</td><td> </td></tr>
+</tbody>
+</table>
+<p>Meal Expenses: 3500</p>
+<p>Total Expenses: 13500</p>
+</body>
+</html>
+"
+`;
+
+exports[`Expense Report - Approval Tests > should generate a plain text report with sample expenses 1`] = `
+"Expense Report: <DATE>
+Dinner	4500	 
+Breakfast	700	 
+Car Rental	12000	 
+Dinner	5200	X
+Breakfast	1200	X
+Meal Expenses: 11600
+Total Expenses: 23600
+"
+`;
+
+exports[`Expense Report - Approval Tests > should generate an HTML report with sample expenses 1`] = `
 "<!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +64,12 @@ exports[`Expense Report - HTML > should generate an HTML report with sample expe
 "
 `;
 
-exports[`Expense Report - Plain Text > should generate a plain text report with sample expenses 1`] = `
-"Expense Report: <DATE>
-Dinner	4500	 
-Breakfast	700	 
-Car Rental	12000	 
-Dinner	5200	X
-Breakfast	1200	X
-Meal Expenses: 11600
-Total Expenses: 23600
+exports[`Expense Report - Approval Tests > should generate plain text report correctly using spy 1`] = `
+"Expense Report: 2025-01-15
+Dinner	3000	 
+Breakfast	500	 
+Car Rental	10000	 
+Meal Expenses: 3500
+Total Expenses: 13500
 "
 `;

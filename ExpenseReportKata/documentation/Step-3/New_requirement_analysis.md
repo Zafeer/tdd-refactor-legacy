@@ -2,7 +2,7 @@
 
 > ## NOTE:
 >
-> The lunch limit of 2000 does not clearly mention whether they want a capping or just to be marked as an over limit expense. Here we are going with the assumption that no value needs to be capped, but just be displayed with a marker sign.
+> The lunch limit of 2000 as described in [Expense Report Kata](https://github.com/christianhujer/expensereport-level-2?tab=readme-ov-file#expensereport-level-2) does not clearly mention whether they want a capping or just to be marked as an over limit expense. Here we are going with the assumption that no value needs to be capped, but just be displayed with a marker sign.
 
 To implement the new requirement (add a lunch expense type and support JSON output) without refactoring, we would have to add changes in multiple places, leading to more code complication. Here's a detailed breakdown of the required changes:
 

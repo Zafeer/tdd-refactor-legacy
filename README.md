@@ -26,6 +26,35 @@ These exercises focus on improving poorly written code while preserving function
 
 - **Expense Report Generator Kata**
 
+## How to Use
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/Zafeer/tdd-refactor-legacy.git
+   cd tdd-refactor-legacy
+   ```
+
+2. **Set Up the Environment:**
+   Install the necessary dependencies for Typescript (i.e. NodeJS if not already installed).
+   Preconfigured with linting and formatting
+
+   ```bash
+   npm i
+   ```
+
+3. **Pick an Exercise:**
+   Navigate to the desired kata directory and follow the README for specific instructions.
+
+4. **Write Tests:**
+   Start by writing failing tests, implement functionality, and refactor iteratively.
+
+5. **Run Tests:**
+   Use vitest verify your solution:
+   ```bash
+   npm run test:watch  # JavaScript/TypeScript
+   ```
+
 ---
 
 Start practicing and make your code cleaner, more testable, and maintainable!

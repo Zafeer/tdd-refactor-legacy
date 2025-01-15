@@ -1,0 +1,40 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Expense Report - HTML > should generate an HTML report with sample expenses 1`] = `
+"<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Report: <DATE></title>
+</head>
+<body>
+<h1>Expense Report: <DATE></h1>
+<table>
+<thead>
+<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
+</thead>
+<tbody>
+<tr><td>Dinner</td><td>4500</td><td> </td></tr>
+<tr><td>Breakfast</td><td>700</td><td> </td></tr>
+<tr><td>Car Rental</td><td>12000</td><td> </td></tr>
+<tr><td>Dinner</td><td>5200</td><td>X</td></tr>
+<tr><td>Breakfast</td><td>1200</td><td>X</td></tr>
+</tbody>
+</table>
+<p>Meal Expenses: 11600</p>
+<p>Total Expenses: 23600</p>
+</body>
+</html>
+"
+`;
+
+exports[`Expense Report - Plain Text > should generate a plain text report with sample expenses 1`] = `
+"Expense Report: <DATE>
+Dinner	4500	 
+Breakfast	700	 
+Car Rental	12000	 
+Dinner	5200	X
+Breakfast	1200	X
+Meal Expenses: 11600
+Total Expenses: 23600
+"
+`;

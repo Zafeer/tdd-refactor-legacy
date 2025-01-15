@@ -23,6 +23,8 @@ For more details on the requirements, refer to the [Expense Report Level 2](http
 1. Clone the repository.
 2. Navigate to the project directory and install dependencies.
 3. Run the application to generate reports with sample expenses:
+   Perform the below actions on the root folder
    ```bash
+   npm i
    npm run test:watch
    ```

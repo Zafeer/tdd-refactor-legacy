@@ -50,7 +50,7 @@ These exercises focus on improving poorly written code while preserving function
    Start by writing failing tests, implement functionality, and refactor iteratively.
 
 5. **Run Tests:**
-   Use vitest verify your solution:
+   Use vitest to verify your solution:
    ```bash
    npm run test:watch  # JavaScript/TypeScript
    ```

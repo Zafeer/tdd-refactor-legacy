@@ -149,7 +149,7 @@ car-rental: { name: "Car Rental", limit: Infinity },
 };
 ```
 
-## Step 8: Update Over-Limit Marker
+## Step 8: Update Over-Limit Marker and consolidate conditional
 
 ```typescript
 function getMealOverExpenseMarker(expense: Expense): string {
@@ -158,7 +158,7 @@ function getMealOverExpenseMarker(expense: Expense): string {
 }
 ```
 
-## Step 9: Generate Report Rows Using ExpenseTypeDetails
+## Step 9: Generate Report Rows Using ExpenseTypeDetails and consolidate conditional
 
 ```typescript
 function generateTableRow(expense: Expense): string {
@@ -237,36 +237,15 @@ const formatter = htmlMode
 printReport(formatter, expenses);
 ```
 
-## Step 12: Add category to Expenses
+## Step 12: Add mealCategory to expenseType so as to determine addition for meal expenses
 
 ```typescript
-function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
-  let totalExpenses = 0;
-  let mealExpenses = 0;
 
-  let output = formatter.generateHeader();
-
-  for (const expense of expenses) {
-    if (expense.type === 'breakfast' || expense.type === 'dinner') {
-      mealExpenses += expense.amount;
-    }
-    totalExpenses += expense.amount;
-    output += formatter.generateTableRow(expense);
-  }
-
-  output += formatter.generateFooter(totalExpenses, mealExpenses);
-  process.stdout.write(output);
-}
-
-const formatter = htmlMode
-  ? new HtmlReportFormatter()
-  : new PlainTextReportFormatter();
-printReport(formatter, expenses);
-```
-
-## Step 13: Add mealCategory to expenseType so as to determine addition for meal expenses
-
-```typescript
+type ExpenseDetails = {
+name: string;
+limit: number;
+mealCategory: boolean;
+};
 
 const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
   dinner: { name: 'Dinner', limit: 5000, mealCategory: true },

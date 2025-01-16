@@ -1,4 +1,19 @@
-type ExpenseType = 'dinner' | 'breakfast' | 'car-rental';
+const ExpenseType = {
+  DINNER: 'dinner',
+  BREAKFAST: 'breakfast',
+  CAR_RENTAL: 'car-rental',
+} as const;
+
+type ExpenseType = (typeof ExpenseType)[keyof typeof ExpenseType];
+
+/*
+OR
+enum ExpenseType {
+  DINNER = 'dinner',
+  BREAKFAST = 'breakfast',
+  CAR_RENTAL = 'car-rental',
+}
+ */
 
 type ExpenseDetails = {
   name: string;
@@ -7,9 +22,17 @@ type ExpenseDetails = {
 };
 
 const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
-  dinner: { name: 'Dinner', limit: 5000, mealCategory: true },
-  breakfast: { name: 'Breakfast', limit: 1000, mealCategory: true },
-  'car-rental': { name: 'Car Rental', limit: Infinity, mealCategory: false },
+  [ExpenseType.DINNER]: { name: 'Dinner', limit: 5000, mealCategory: true },
+  [ExpenseType.BREAKFAST]: {
+    name: 'Breakfast',
+    limit: 1000,
+    mealCategory: true,
+  },
+  [ExpenseType.CAR_RENTAL]: {
+    name: 'Car Rental',
+    limit: Infinity,
+    mealCategory: false,
+  },
 };
 
 class Expense {

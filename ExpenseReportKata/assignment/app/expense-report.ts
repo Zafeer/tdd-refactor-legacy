@@ -2,6 +2,7 @@ const ExpenseType = {
   DINNER: 'dinner',
   BREAKFAST: 'breakfast',
   CAR_RENTAL: 'car-rental',
+  LUNCH: 'lunch',
 } as const;
 
 type ExpenseType = (typeof ExpenseType)[keyof typeof ExpenseType];
@@ -33,6 +34,11 @@ const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
     limit: Infinity,
     mealCategory: false,
   },
+  [ExpenseType.LUNCH]: {
+    name: 'Lunch',
+    limit: 2000,
+    mealCategory: true,
+  },
 };
 
 class Expense {
@@ -48,6 +54,14 @@ function getFormattedDate(): string {
   return new Date().toISOString().substr(0, 10);
 }
 
+function getMealOverExpenseMarker(expense: Expense): string {
+  return expense.amount > ExpenseTypeDetails[expense.type].limit ? 'X' : ' ';
+}
+
+function getExpenseName(expense: Expense): string {
+  return ExpenseTypeDetails[expense.type].name;
+}
+
 interface ReportFormatter {
   generateHeader(): string;
   generateTableRow(expense: Expense): string;
@@ -60,9 +74,9 @@ class HtmlReportFormatter implements ReportFormatter {
   }
 
   generateTableRow(expense: Expense): string {
-    const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
-    return `<tr><td>${details.name}</td><td>${expense.amount}</td><td>${overLimitMarker}</td></tr>\n`;
+    const expenseName = getExpenseName(expense);
+    const overLimitMarker = getMealOverExpenseMarker(expense);
+    return `<tr><td>${expenseName}</td><td>${expense.amount}</td><td>${overLimitMarker}</td></tr>\n`;
   }
 
   generateFooter(totalExpenses: number, mealExpenses: number): string {
@@ -76,9 +90,9 @@ class PlainTextReportFormatter implements ReportFormatter {
   }
 
   generateTableRow(expense: Expense): string {
-    const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
-    return `${details.name}\t${expense.amount}\t${overLimitMarker}\n`;
+    const expenseName = getExpenseName(expense);
+    const overLimitMarker = getMealOverExpenseMarker(expense);
+    return `${expenseName}\t${expense.amount}\t${overLimitMarker}\n`;
   }
 
   generateFooter(totalExpenses: number, mealExpenses: number): string {
@@ -108,6 +122,7 @@ export {
   printReport,
   Expense,
   ExpenseType,
+  ExpenseTypeDetails,
   ReportFormatter,
   HtmlReportFormatter,
   PlainTextReportFormatter,

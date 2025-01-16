@@ -163,7 +163,7 @@ function getMealOverExpenseMarker(expense: Expense): string {
 ```typescript
 function generateTableRow(expense: Expense): string {
   const details = ExpenseTypeDetails[expense.type];
-  const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
+  const overLimitMarker = getMealOverExpenseMarker(expense);
   return `${details.name}\t${expense.amount}\t${overLimitMarker}\n`;
 }
 ```
@@ -184,7 +184,7 @@ class HtmlReportFormatter implements ReportFormatter {
 
   generateTableRow(expense: Expense): string {
     const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
+    const overLimitMarker = getMealOverExpenseMarker(expense);
     return `<tr><td>${details.name}</td><td>${expense.amount}</td><td>${overLimitMarker}</td></tr>`;
   }
 
@@ -200,7 +200,7 @@ class PlainTextReportFormatter implements ReportFormatter {
 
   generateTableRow(expense: Expense): string {
     const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
+    const overLimitMarker = getMealOverExpenseMarker(expense);
     return `${details.name}\t${expense.amount}\t${overLimitMarker}\n`;
   }
 

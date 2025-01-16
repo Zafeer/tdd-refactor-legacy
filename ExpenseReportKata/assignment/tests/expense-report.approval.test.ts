@@ -53,7 +53,7 @@ describe('Expense Report - Approval Tests', () => {
         new Expense(ExpenseType.CAR_RENTAL, 10000),
         new Expense(ExpenseType.DINNER, 5001), // Over-limit dinner
         new Expense(ExpenseType.BREAKFAST, 1001), // Over-limit breakfast
-        new Expense('car-rental', Number.MAX_SAFE_INTEGER), // Max car-rental
+        new Expense(ExpenseType.CAR_RENTAL, Number.MAX_SAFE_INTEGER), // Max car-rental
       ];
 
       //Act
@@ -98,10 +98,10 @@ describe('Expense Report - Approval Tests', () => {
       const expenses: Expense[] = [
         new Expense(ExpenseType.DINNER, 3000),
         new Expense(ExpenseType.BREAKFAST, 500),
-        new Expense('car-rental', 10000),
+        new Expense(ExpenseType.CAR_RENTAL, 10000),
         new Expense(ExpenseType.DINNER, 5001), // Over-limit dinner
         new Expense(ExpenseType.BREAKFAST, 1001), // Over-limit breakfast
-        new Expense('car-rental', Number.MAX_SAFE_INTEGER), // Max car-rental
+        new Expense(ExpenseType.CAR_RENTAL, Number.MAX_SAFE_INTEGER), // Max car-rental
       ];
 
       //Act

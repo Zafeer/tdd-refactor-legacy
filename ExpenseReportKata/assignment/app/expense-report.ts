@@ -1,17 +1,5 @@
 type ExpenseType = 'dinner' | 'breakfast' | 'car-rental';
 
-type ExpenseDetails = {
-  name: string;
-  limit: number;
-  mealCategory: boolean;
-};
-
-const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
-  dinner: { name: 'Dinner', limit: 5000, mealCategory: true },
-  breakfast: { name: 'Breakfast', limit: 1000, mealCategory: true },
-  'car-rental': { name: 'Car Rental', limit: Infinity, mealCategory: false },
-};
-
 class Expense {
   type: ExpenseType;
   amount: number;
@@ -21,77 +9,105 @@ class Expense {
   }
 }
 
-function getFormattedDate(): string {
-  return new Date().toISOString().substr(0, 10);
-}
+function printReport(htmlMode: boolean, expenses: Expense[]) {
+  let totalExpenses: number = 0;
+  let mealExpenses: number = 0;
 
-interface ReportFormatter {
-  generateHeader(): string;
-  generateTableRow(expense: Expense): string;
-  generateFooter(totalExpenses: number, mealExpenses: number): string;
-}
-
-class HtmlReportFormatter implements ReportFormatter {
-  generateHeader(): string {
-    return `<!DOCTYPE html>\n<html>\n<head>\n<title>Expense Report: ${getFormattedDate()}</title>\n</head>\n<body>\n<h1>Expense Report: ${getFormattedDate()}</h1>\n<table>\n<thead>\n<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>\n</thead>\n<tbody>\n`;
-  }
-
-  generateTableRow(expense: Expense): string {
-    const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
-    return `<tr><td>${details.name}</td><td>${expense.amount}</td><td>${overLimitMarker}</td></tr>\n`;
-  }
-
-  generateFooter(totalExpenses: number, mealExpenses: number): string {
-    return `</tbody>\n</table>\n<p>Meal Expenses: ${mealExpenses}</p>\n<p>Total Expenses: ${totalExpenses}</p>\n</body>\n</html>\n`;
-  }
-}
-
-class PlainTextReportFormatter implements ReportFormatter {
-  generateHeader(): string {
-    return `Expense Report: ${getFormattedDate()}\n`;
-  }
-
-  generateTableRow(expense: Expense): string {
-    const details = ExpenseTypeDetails[expense.type];
-    const overLimitMarker = expense.amount > details.limit ? 'X' : ' ';
-    return `${details.name}\t${expense.amount}\t${overLimitMarker}\n`;
-  }
-
-  generateFooter(totalExpenses: number, mealExpenses: number): string {
-    return `Meal Expenses: ${mealExpenses}\nTotal Expenses: ${totalExpenses}\n`;
-  }
-}
-
-function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
-  let totalExpenses = 0;
-  let mealExpenses = 0;
-
-  if (!formatter || typeof formatter.generateHeader !== 'function') {
-    throw new TypeError(
-      'Invalid formatter: must implement ReportFormatter interface'
+  if (htmlMode) {
+    process.stdout.write('<!DOCTYPE html>\n');
+    process.stdout.write('<html>\n');
+    process.stdout.write('<head>\n');
+    process.stdout.write(
+      '<title>Expense Report: ' +
+        new Date().toISOString().substr(0, 10) +
+        '</title>\n'
+    );
+    process.stdout.write('</head>\n');
+    process.stdout.write('<body>\n');
+    process.stdout.write(
+      '<h1>Expense Report: ' +
+        new Date().toISOString().substr(0, 10) +
+        '</h1>\n'
+    );
+  } else {
+    process.stdout.write(
+      'Expense Report: ' + new Date().toISOString().substr(0, 10) + '\n'
     );
   }
 
-  let output = formatter.generateHeader();
-
+  if (htmlMode) {
+    process.stdout.write('<table>\n');
+    process.stdout.write('<thead>\n');
+    process.stdout.write(
+      '<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>\n'
+    );
+    process.stdout.write('</thead>\n');
+    process.stdout.write('<tbody>\n');
+  }
   for (const expense of expenses) {
-    if (ExpenseTypeDetails[expense.type].mealCategory) {
+    if (expense.type == 'dinner' || expense.type == 'breakfast') {
       mealExpenses += expense.amount;
     }
+
+    let expenseName = '';
+    switch (expense.type) {
+      case 'dinner':
+        expenseName = 'Dinner';
+        break;
+      case 'breakfast':
+        expenseName = 'Breakfast';
+        break;
+      case 'car-rental':
+        expenseName = 'Car Rental';
+        break;
+    }
+
+    let mealOverExpensesMarker =
+      (expense.type == 'dinner' && expense.amount > 5000) ||
+      (expense.type == 'breakfast' && expense.amount > 1000)
+        ? 'X'
+        : ' ';
+
+    if (htmlMode) {
+      process.stdout.write(
+        '<tr><td>' +
+          expenseName +
+          '</td><td>' +
+          expense.amount +
+          '</td><td>' +
+          mealOverExpensesMarker +
+          '</td></tr>\n'
+      );
+    } else {
+      process.stdout.write(
+        expenseName +
+          '\t' +
+          expense.amount +
+          '\t' +
+          mealOverExpensesMarker +
+          '\n'
+      );
+    }
+
     totalExpenses += expense.amount;
-    output += formatter.generateTableRow(expense);
+  }
+  if (htmlMode) {
+    process.stdout.write('</tbody>\n');
+    process.stdout.write('</table>\n');
   }
 
-  output += formatter.generateFooter(totalExpenses, mealExpenses);
-  process.stdout.write(output);
+  if (htmlMode) {
+    process.stdout.write('<p>Meal Expenses: ' + mealExpenses + '</p>\n');
+    process.stdout.write('<p>Total Expenses: ' + totalExpenses + '</p>\n');
+  } else {
+    process.stdout.write('Meal Expenses: ' + mealExpenses + '\n');
+    process.stdout.write('Total Expenses: ' + totalExpenses + '\n');
+  }
+
+  if (htmlMode) {
+    process.stdout.write('</body>\n');
+    process.stdout.write('</html>\n');
+  }
 }
 
-export {
-  printReport,
-  Expense,
-  ExpenseType,
-  ReportFormatter,
-  HtmlReportFormatter,
-  PlainTextReportFormatter,
-};
+export { printReport, Expense, ExpenseType };

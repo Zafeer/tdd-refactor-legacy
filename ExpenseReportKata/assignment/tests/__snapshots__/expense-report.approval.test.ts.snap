@@ -1,40 +1,35 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Expense Report - Approval Tests > should generate a html report with sample expenses using > captureStdout 1`] = `
+exports[`Expense Report - Approval Tests > should generate a html report > with no expenses 1`] = `
 "<!DOCTYPE html>
 <html>
 <head>
-<title>Expense Report: <DATE></title>
+<title>Expense Report: {{DATE}}</title>
 </head>
 <body>
-<h1>Expense Report: <DATE></h1>
+<h1>Expense Report: {{DATE}}</h1>
 <table>
 <thead>
 <tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
 </thead>
 <tbody>
-<tr><td>Dinner</td><td>4500</td><td> </td></tr>
-<tr><td>Breakfast</td><td>700</td><td> </td></tr>
-<tr><td>Car Rental</td><td>12000</td><td> </td></tr>
-<tr><td>Dinner</td><td>5200</td><td>X</td></tr>
-<tr><td>Breakfast</td><td>1200</td><td>X</td></tr>
 </tbody>
 </table>
-<p>Meal Expenses: 11600</p>
-<p>Total Expenses: 23600</p>
+<p>Meal Expenses: 0</p>
+<p>Total Expenses: 0</p>
 </body>
 </html>
 "
 `;
 
-exports[`Expense Report - Approval Tests > should generate a html report with sample expenses using > spy 1`] = `
+exports[`Expense Report - Approval Tests > should generate a html report > with under and over limit expenses 1`] = `
 "<!DOCTYPE html>
 <html>
 <head>
-<title>Expense Report: 2025-01-15</title>
+<title>Expense Report: {{DATE}}</title>
 </head>
 <body>
-<h1>Expense Report: 2025-01-15</h1>
+<h1>Expense Report: {{DATE}}</h1>
 <table>
 <thead>
 <tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
@@ -43,37 +38,34 @@ exports[`Expense Report - Approval Tests > should generate a html report with sa
 <tr><td>Dinner</td><td>3000</td><td> </td></tr>
 <tr><td>Breakfast</td><td>500</td><td> </td></tr>
 <tr><td>Car Rental</td><td>10000</td><td> </td></tr>
-<tr><td>Dinner</td><td>5100</td><td>X</td></tr>
-<tr><td>Breakfast</td><td>1300</td><td>X</td></tr>
+<tr><td>Dinner</td><td>5001</td><td>X</td></tr>
+<tr><td>Breakfast</td><td>1001</td><td>X</td></tr>
+<tr><td>Car Rental</td><td>9007199254740991</td><td> </td></tr>
 </tbody>
 </table>
-<p>Meal Expenses: 9900</p>
-<p>Total Expenses: 19900</p>
+<p>Meal Expenses: 9502</p>
+<p>Total Expenses: 9007199254760492</p>
 </body>
 </html>
 "
 `;
 
-exports[`Expense Report - Approval Tests > should generate a plain text report with sample expenses using > captureStdout 1`] = `
-"Expense Report: <DATE>
-Dinner	4500	 
-Breakfast	700	 
-Car Rental	12000	 
-Dinner	5200	X
-Breakfast	1200	X
-Meal Expenses: 11600
-Total Expenses: 23600
+exports[`Expense Report - Approval Tests > should generate a plain text report > with no expenses 1`] = `
+"Expense Report: {{DATE}}
+Meal Expenses: 0
+Total Expenses: 0
 "
 `;
 
-exports[`Expense Report - Approval Tests > should generate a plain text report with sample expenses using > spy 1`] = `
-"Expense Report: 2025-01-15
+exports[`Expense Report - Approval Tests > should generate a plain text report > with under and over limit expenses 1`] = `
+"Expense Report: {{DATE}}
 Dinner	3000	 
 Breakfast	500	 
 Car Rental	10000	 
-Dinner	5100	X
-Breakfast	1300	X
-Meal Expenses: 9900
-Total Expenses: 19900
+Dinner	5001	X
+Breakfast	1001	X
+Car Rental	9007199254740991	 
+Meal Expenses: 9502
+Total Expenses: 9007199254760492
 "
 `;

@@ -5,13 +5,13 @@
   "main": "index.ts",
   "scripts": {
     "test": "vitest run --coverage",
-    "test:watch": "vitest"
+    "test:watch": "vitest --coverage"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.10.6",
-    "@vitest/coverage-v8": "^2.1.6",
+    "@vitest/coverage-v8": "^2.1.8",
     "prettier": "^3.4.1",
     "typescript": "^5.7.2",
     "vitest": "^2.1.6"

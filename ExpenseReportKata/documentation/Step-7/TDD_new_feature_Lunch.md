@@ -4,9 +4,17 @@ This document outlines the step-by-step process of implementing the **Lunch** ca
 
 ---
 
-## Step 1: Add a Test for Recognizing Lunch Category
+## Step 1: Understand Requirements
 
-### **Red**
+The Expense Report should:
+
+- Accomodate a Lunch Expense
+- Limit of 2000 for for each Lunch Expense.
+- Over this limit ensures it is marked as overLimit expense
+
+## Step 2: TDD for Recognizing Lunch Category
+
+### Failing Test
 
 Write a test to check that the `ExpenseType` enum recognizes the new **Lunch** category.
 
@@ -24,7 +32,7 @@ describe('Expense Report with Lunch Category', () => {
 
 Run the test and observe the failure since Lunch is not yet defined in the application code.
 
-## Step 2: Add Lunch Category to ExpenseType
+## Step 3: Add Lunch Category to ExpenseType
 
 ### **Green**
 
@@ -41,7 +49,7 @@ const ExpenseType = {
 
 Rerun the test, and it should pass.
 
-## Step 3: Add a Test for Recognizing Lunch Expense Details
+## Step 4: Add a Test for Recognizing Lunch Expense Details
 
 ### **Red**
 
@@ -61,7 +69,7 @@ describe('Expense Report with Lunch Category', () => {
 
 Run the test and observe the failure since Lunch Details is not yet defined in the application code.
 
-## Step 4: Add Lunch Expense Details to ExpenseTypeDetails
+## Step 5: Add Lunch Expense Details to ExpenseTypeDetails
 
 ### **Green**
 
@@ -93,7 +101,7 @@ const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
 
 Rerun the test, and it should pass.
 
-## Step5: Check for all Lunch Expense Details to be defined
+## Step 6: Check for all Lunch Expense Details to be defined
 
 ### **Green**
 
@@ -108,7 +116,7 @@ describe('Expense Report with Lunch Category', () => {
 });
 ```
 
-### Step 6: Implement Over-Limit Logic for Lunch
+### Step 7: Implement Over-Limit Logic for Lunch
 
 ### **Green**
 
@@ -131,7 +139,7 @@ it('should mark Lunch expenses over the limit correctly', () => {
 
 Run the test, and it will fail because the logic for marking over-limit Lunch expenses is not yet implemented.
 
-### Step 7: Test Total and Meal Expenses with Lunch
+### Step 8: Test Total and Meal Expenses with Lunch
 
 ### **Green**
 
@@ -159,7 +167,7 @@ it('should include Lunch expenses in the report', () => {
 
 Run the test, and it will fail if the totals are not calculated correctly for Lunch expenses.
 
-### Step 8: Refactor
+### Step 9: Refactor
 
 Review the implementation for opportunities to simplify or improve the structure. For instance:
 Abstract repetitive operations in the formatter.

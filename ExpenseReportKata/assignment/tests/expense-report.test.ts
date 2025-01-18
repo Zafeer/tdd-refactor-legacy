@@ -71,3 +71,56 @@ describe('Expense Report with new Lunch Category', () => {
     expect(output).toContain('2500');
   });
 });
+
+describe('Expense Report with new JSONReportFormatter', () => {
+  let formatter: JSONReportFormatter;
+
+  beforeEach(() => {
+    formatter = new JSONReportFormatter();
+  });
+
+  it('should generate header correctly', () => {
+    const header = formatter.generateHeader();
+    expect(header).toBe(
+      `{\n  "date": "${getFormattedDate()}",\n  "expenses": [\n`
+    );
+  });
+
+  Object.values(ExpenseType).forEach((type) => {
+    it(`should generate table row correctly for ${type}`, () => {
+      const expense = new Expense(type, 1501);
+      const row = formatter.generateTableRow(expense);
+      const expectedRow = `{"type": "${ExpenseTypeDetails[type].name}", "amount": 1501, "overLimit": ${ExpenseTypeDetails[type].limit > expense.amount ? '" "' : '"X"'}}`;
+      expect(row.trim()).toBe(expectedRow);
+    });
+  });
+
+  it('should generate footer correctly', () => {
+    const footer = formatter.generateFooter(10000, 6000);
+    const expectedFooter = `\n  ],\n  "mealExpenses": 6000,\n  "totalExpenses": 10000\n}`;
+    expect(footer).toBe(expectedFooter);
+  });
+
+  it('should format the entire report correctly', () => {
+    const expenses = [
+      new Expense(ExpenseType.DINNER, 6000),
+      new Expense(ExpenseType.BREAKFAST, 800),
+    ];
+    let report = formatter.generateHeader();
+    report += formatter.generateTableRow(expenses[0]);
+    // report += `,\n`;
+    report += formatter.generateTableRow(expenses[1]);
+    report += formatter.generateFooter(6800, 6800);
+
+    const expectedReport = `{
+  "date": "${getFormattedDate()}",
+  "expenses": [
+    {"type": "Dinner", "amount": 6000, "overLimit": "X"},
+    {"type": "Breakfast", "amount": 800, "overLimit": " "}
+  ],
+  "mealExpenses": 6800,
+  "totalExpenses": 6800
+}`;
+    expect(report).toBe(expectedReport);
+  });
+});

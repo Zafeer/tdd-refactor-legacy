@@ -100,6 +100,29 @@ class PlainTextReportFormatter implements ReportFormatter {
   }
 }
 
+class JSONReportFormatter implements ReportFormatter {
+  private isFirstRow = true;
+
+  generateHeader(): string {
+    this.isFirstRow = true; // Reset for every report generation
+    return `{\n  "date": "${getFormattedDate()}",\n  "expenses": [\n`;
+  }
+
+  generateTableRow(expense: Expense): string {
+    const row = `    {"type": "${getExpenseName(expense)}", "amount": ${expense.amount}, "overLimit": "${getMealOverExpenseMarker(expense)}"}`;
+    if (this.isFirstRow) {
+      this.isFirstRow = false;
+      return row;
+    } else {
+      return `,\n${row}`;
+    }
+  }
+
+  generateFooter(totalExpenses: number, mealExpenses: number): string {
+    return `\n  ],\n  "mealExpenses": ${mealExpenses},\n  "totalExpenses": ${totalExpenses}\n}`;
+  }
+}
+
 function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
   let totalExpenses = 0;
   let mealExpenses = 0;
@@ -120,10 +143,12 @@ function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
 
 export {
   printReport,
+  getFormattedDate,
   Expense,
   ExpenseType,
   ExpenseTypeDetails,
   ReportFormatter,
   HtmlReportFormatter,
   PlainTextReportFormatter,
+  JSONReportFormatter,
 };

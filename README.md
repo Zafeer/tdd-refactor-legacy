@@ -4,6 +4,8 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
 
 ## Objectives
 
+- **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
+
 - **Promote TDD Practices:** Encourage the habit of writing tests before implementing functionality.
   1.  Use FIRST Principles
   2.  Use Red-Green-Refactor
@@ -14,7 +16,6 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
   7.  Triangulation
   8.  Backout
   9.  Test Doubles
-- **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
 
 ## Contents
 

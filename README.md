@@ -1,4 +1,4 @@
-# Refactor-Legacy + TDD (New and Existting Code)
+# Refactor-Legacy + TDD (New and Existing Code)
 
 This repository is a collection of **Test-Driven Development (TDD) Katas** and **Legacy Refactoring Katas**, designed to write clean, maintainable, and testable code.
 
@@ -8,8 +8,11 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
   1.  Use FIRST Principles
   2.  Use Red-Green-Refactor
   3.  Boundary Testing
-  4.  Triangulation
-  5.  Test Doubles
+  4.  Fake It (Till You Make It)
+  5.  Learning Tests
+  6.  One to many Green Bar
+  7.  Triangulation
+  8.  Test Doubles
 - **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
 
 ## Contents

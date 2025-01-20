@@ -22,16 +22,16 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
 These exercises are aimed at practicing TDD principles by building solutions incrementally with tests. Examples include:
 
 - [**FizzBuzz Kata**](FizzBuzzKata)
-- [**RockPaperScissors Kata**] (RockPaperScissorsKata)
-- [**AgeCalculator Kata**] (AgeCalculatorKata)
-- [**EvenDigit Kata**] (EvenDigitKata)
-- [**String Calculator Kata**] (StringCalculatorKata)
+- [**RockPaperScissors Kata**](RockPaperScissorsKata)
+- [**AgeCalculator Kata**](AgeCalculatorKata)
+- [**EvenDigit Kata**](EvenDigitKata)
+- [**String Calculator Kata**](StringCalculatorKata)
 
 ### 2. Legacy Refactoring Kata
 
 This excercise focusses on improving poorly written code while preserving functionality. Examples include:
 
-- [**Expense Report Generator Kata**] (ExpenseReportKata)
+- [**Expense Report Generator Kata**](ExpenseReportKata)
 
 ## How to Use
 

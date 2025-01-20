@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
-  printReport,
+  generateExpenseReport,
   Expense,
   PlainTextReportFormatter,
   HtmlReportFormatter,
@@ -32,7 +32,7 @@ describe('Expense Report - Approval Tests', () => {
       //Act
       const output = captureAndNormalizeStdout(() => {
         const reportFormatter = new PlainTextReportFormatter();
-        printReport(reportFormatter, expenses);
+        generateExpenseReport(reportFormatter, expenses);
       });
 
       // Assert
@@ -59,7 +59,7 @@ describe('Expense Report - Approval Tests', () => {
       //Act
       const output = captureAndNormalizeStdout(() => {
         const reportFormatter = new PlainTextReportFormatter();
-        printReport(reportFormatter, expenses);
+        generateExpenseReport(reportFormatter, expenses);
       });
 
       //Assert
@@ -81,7 +81,7 @@ describe('Expense Report - Approval Tests', () => {
       //Act
       const output = captureAndNormalizeStdout(() => {
         const reportFormatter = new HtmlReportFormatter();
-        printReport(reportFormatter, expenses);
+        generateExpenseReport(reportFormatter, expenses);
       });
 
       // Assert
@@ -107,7 +107,7 @@ describe('Expense Report - Approval Tests', () => {
       //Act
       const output = captureAndNormalizeStdout(() => {
         const reportFormatter = new HtmlReportFormatter();
-        printReport(reportFormatter, expenses);
+        generateExpenseReport(reportFormatter, expenses);
       });
 
       //Assert

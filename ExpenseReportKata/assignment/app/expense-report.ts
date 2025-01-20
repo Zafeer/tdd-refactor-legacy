@@ -123,7 +123,10 @@ class JSONReportFormatter implements ReportFormatter {
   }
 }
 
-function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
+function generateExpenseReport(
+  formatter: ReportFormatter,
+  expenses: Expense[]
+): void {
   let totalExpenses = 0;
   let mealExpenses = 0;
 
@@ -142,8 +145,10 @@ function printReport(formatter: ReportFormatter, expenses: Expense[]): void {
 }
 
 export {
-  printReport,
+  generateExpenseReport ,
   getFormattedDate,
+  getExpenseName,
+  getMealOverExpenseMarker,
   Expense,
   ExpenseType,
   ExpenseTypeDetails,

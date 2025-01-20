@@ -1,4 +1,4 @@
-# Refactor-Legacy + TDD (New and Existing Code)
+# Refactoring Legacy Code and Implementing TDD for New Code/Features
 
 This repository is a collection of **Test-Driven Development (TDD) Katas** and **Legacy Refactoring Katas**, designed to write clean, maintainable, and testable code.
 

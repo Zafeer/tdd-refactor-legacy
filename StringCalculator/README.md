@@ -1,6 +1,6 @@
 # String Calculator Kata
 
-This README documents the approach and steps followed during the String Calculator Kata, focusing on test-driven development (TDD), **learning tests** and iterative refactoring.
+This README documents the approach and steps followed during the String Calculator Kata, focusing on test-driven development (TDD), **learning tests** and iterative refactoring (Incomplete)
 
 ---
 

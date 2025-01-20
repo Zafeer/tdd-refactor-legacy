@@ -10,7 +10,7 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
   3.  Boundary Testing
   4.  Fake It (Till You Make It)
   5.  Learning Tests
-  6.  One to many Green Bar
+  6.  One to many
   7.  Triangulation
   8.  Test Doubles
 - **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
@@ -21,7 +21,7 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
 
 These exercises are aimed at practicing TDD principles by building solutions incrementally with tests. Examples include:
 
-- **FizzBuzz Kata**
+- [**FizzBuzz Kata**](FizzBuzzKata).
 - **AgeCalculator Kata**
 - **String Calculator Kata**
 - **EvenDigit Kata**

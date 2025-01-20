@@ -8,7 +8,7 @@ This document outlines the tests implemented for the Expense Reporting System, c
 
 Tests to ensure the `Expense` class initializes correctly for all types of expenses.
 
-```javascript
+```typescript
 describe('Expense Class', () => {
   Object.values(ExpenseType).forEach((type) => {
     it(`should correctly initialize Expense object for ${type}`, () => {
@@ -24,7 +24,7 @@ describe('Expense Class', () => {
 
 Tests for utility functions that handle various expense operations.
 
-```javascript
+```typescript
 describe('Utility Functions', () => {
   Object.values(ExpenseType).forEach((type) => {
     if (type === ExpenseType.CAR_RENTAL) {
@@ -64,7 +64,7 @@ describe('Utility Functions', () => {
 
 Tests for the `HtmlReportFormatter` class, ensuring proper generation of headers, rows, and footers.
 
-```javascript
+```typescript
 describe('HtmlReportFormatter', () => {
   let formatter;
 
@@ -99,7 +99,7 @@ describe('HtmlReportFormatter', () => {
 
 Tests for the `PlainTextReportFormatter` class, ensuring proper text-based report generation.
 
-```javascript
+```typescript
 describe('PlainTextReportFormatter', () => {
   let formatter;
 
@@ -133,7 +133,7 @@ describe('PlainTextReportFormatter', () => {
 
 Tests for the `JSONReportFormatter` class, ensuring proper JSON report generation.
 
-```javascript
+```typescript
 describe('JSONReportFormatter', () => {
   let formatter;
 
@@ -171,9 +171,9 @@ describe('JSONReportFormatter', () => {
 
 Comprehensive tests for the `generateExpenseReport` function, covering different report formats and scenarios.
 
-```javascript
+```typescript
 describe('generateExpenseReport', () => {
-  let consoleSpy;
+  let consoleSpy: any;
 
   beforeEach(() => {
     consoleSpy = vi
@@ -193,24 +193,75 @@ describe('generateExpenseReport', () => {
       new Expense(ExpenseType.CAR_RENTAL, 15000),
     ];
     const formatter = new HtmlReportFormatter();
+    // Corrected expected output with proper placement of 'X' markers and closing tags
+    const expectedOutput = `<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Report: ${getFormattedDate()}</title>
+</head>
+<body>
+<h1>Expense Report: ${getFormattedDate()}</h1>
+<table>
+<thead>
+<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
+</thead>
+<tbody>
+<tr><td>Dinner</td><td>6000</td><td>X</td></tr>
+<tr><td>Breakfast</td><td>800</td><td> </td></tr>
+<tr><td>Lunch</td><td>3000</td><td>X</td></tr>
+<tr><td>Car Rental</td><td>15000</td><td> </td></tr>
+</tbody>
+</table>
+<p>Meal Expenses: 9800</p>
+<p>Total Expenses: 24800</p>
+</body>
+</html>`;
 
     generateExpenseReport(formatter, expenses);
-    expect(consoleSpy.mock.calls[0][0]).toContain('<title>Expense Report');
+    const actualOutput = consoleSpy.mock.calls[0][0];
+
+    // Check if the actual output contains the expected output
+    expect(actualOutput).toContain(expectedOutput);
   });
 
   it('should print Plain Text report correctly', () => {
     const expenses = [
       new Expense(ExpenseType.DINNER, 500),
       new Expense(ExpenseType.BREAKFAST, 1000),
-      new Expense(ExpenseType.LUNCH, 2000),
+      new Expense(ExpenseType.LUNCH, 3000),
       new Expense(ExpenseType.CAR_RENTAL, 10000),
     ];
     const formatter = new PlainTextReportFormatter();
 
+    const expectedOutput = `Expense Report: ${getFormattedDate()}
+Dinner        500
+Breakfast     1000
+Lunch         2000      
+Car Rental    10000   
+Meal Expenses:  3500
+Total Expenses:   13500`;
+
+    // Execute the function to print the report
     generateExpenseReport(formatter, expenses);
+
+    // Ensure each type is mentioned in the output
+    Object.values(ExpenseType).forEach((type) => {
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining(ExpenseTypeDetails[type].name)
+      );
+    });
+
+    // Ensure total expenses are correctly printed
     expect(consoleSpy).toHaveBeenCalledWith(
       expect.stringContaining('Total Expenses: 13500')
     );
+
+    // Normalize spaces by collapsing them and removing newlines
+    const normalize = (str: string) => str.replace(/\s+/g, ' ').trim();
+    const actualOutput = consoleSpy.mock.calls.join('');
+
+    // Ensure the full report matches the expected output
+    expect(normalize(actualOutput)).toContain(normalize(expectedOutput));
   });
 
   it('should print JSON report correctly', () => {
@@ -221,9 +272,62 @@ describe('generateExpenseReport', () => {
       new Expense(ExpenseType.CAR_RENTAL, 10000),
     ];
     const formatter = new JSONReportFormatter();
+    const expectedOutput = `{
+  "date": "${getFormattedDate()}",
+  "expenses": [
+    {"type": "Dinner", "amount": 5000, "overLimit": " "},
+    {"type": "Breakfast", "amount": 1000, "overLimit": " "},
+    {"type": "Lunch", "amount": 2000, "overLimit": " "},
+    {"type": "Car Rental", "amount": 10000, "overLimit": " "}
+  ],
+  "mealExpenses": 8000,
+  "totalExpenses": 18000
+}`;
 
     generateExpenseReport(formatter, expenses);
-    expect(consoleSpy.mock.calls[0][0]).toContain('"totalExpenses": 18000');
+    const actualOutput = consoleSpy.mock.calls[0][0]; // The first call and the first argument passed
+
+    expect(actualOutput).toContain(expectedOutput);
+  });
+
+  it('should handle empty expense list gracefully', () => {
+    const expenses: Expense[] = [];
+    const formatter = new HtmlReportFormatter();
+
+    generateExpenseReport(formatter, expenses);
+
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('<p>Total Expenses: 0</p>')
+    );
+    expect(consoleSpy).toHaveBeenCalledWith(
+      expect.stringContaining('<p>Meal Expenses: 0</p>')
+    );
+  });
+
+  it('should handle all expense categories with over and normal limits', () => {
+    const expenses = [
+      new Expense(ExpenseType.DINNER, 5000),
+      new Expense(ExpenseType.DINNER, 6000),
+      new Expense(ExpenseType.BREAKFAST, 500),
+      new Expense(ExpenseType.BREAKFAST, 2000),
+      new Expense(ExpenseType.LUNCH, 1500),
+      new Expense(ExpenseType.LUNCH, 3000),
+      new Expense(ExpenseType.CAR_RENTAL, 2000),
+      new Expense(ExpenseType.CAR_RENTAL, 50000),
+    ];
+    const formatter = new PlainTextReportFormatter();
+
+    generateExpenseReport(formatter, expenses);
+
+    expenses.forEach((expense) => {
+      const overLimitMarker =
+        expense.amount > ExpenseTypeDetails[expense.type].limit ? '\tX' : '';
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          `${ExpenseTypeDetails[expense.type].name}\t${expense.amount}${overLimitMarker}`
+        )
+      );
+    });
   });
 });
 ```

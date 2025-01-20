@@ -1,6 +1,6 @@
 # Refactoring the Tests for `ExpenseReport`
 
-This document outlines the steps to refactor and improve the tests for the `printReport` function.
+This document outlines the steps to refactor and improve the tests for the `generateExpenseReport` function.
 
 ## 1. Key Goals of the Refactor
 
@@ -40,7 +40,7 @@ function captureAndNormalizeStdout(callback: () => void): string {
 
 const output = captureAndNormalizeStdout(() => {
   const reportFormatter = new PlainTextReportFormatter();
-  printReport(reportFormatter, expenses);
+  generateExpenseReport(reportFormatter, expenses);
 });
 ```
 
@@ -50,7 +50,7 @@ Utilize the newly introduced `ExpenseType` and formatter classes (`PlainTextRepo
 
 ```typescript
 const reportFormatter = new PlainTextReportFormatter();
-printReport(reportFormatter, expenses);
+generateExpenseReport(reportFormatter, expenses);
 ```
 
 ### Step 3. **Remove Hardcoded Values**:

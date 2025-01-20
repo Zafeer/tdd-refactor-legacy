@@ -253,13 +253,27 @@ const ExpenseTypeDetails: Record<ExpenseType, ExpenseDetails> = {
   car-rental: { name: 'Car Rental', limit: Infinity, mealCategory: false },
 };
 
-function printReport():void
 {
     ...
     if (ExpenseTypeDetails[expense.type].mealCategory) {
         mealExpenses += expense.amount;
     }
+```
 
-}
+## Step 13: Rename printReport
 
+```typescript
+function printReport(
+  formatter: ReportFormatter,
+  expenses: Expense[]
+):
+```
+
+TO
+
+```typescript
+function generateExpenseReport(
+  formatter: ReportFormatter,
+  expenses: Expense[]
+):
 ```

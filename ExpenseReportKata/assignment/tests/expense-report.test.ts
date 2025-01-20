@@ -1,13 +1,4 @@
-import {
-  beforeEach,
-  describe,
-  it,
-  test,
-  vitest,
-  afterEach,
-  expect,
-  vi,
-} from 'vitest';
+import { beforeEach, describe, it, test, afterEach, expect, vi } from 'vitest';
 import {
   Expense,
   ExpenseType,
@@ -21,7 +12,7 @@ import {
   JSONReportFormatter,
 } from '../app/expense-report'; // Adjust the import path
 
-//TDD with new features - for all tests see below//
+// TDD with new Lunch feature
 describe('Expense Report with new Lunch Category', () => {
   it('should recognize the Lunch category', () => {
     expect(ExpenseTypeDetails[ExpenseType.LUNCH]).toBeDefined();
@@ -85,6 +76,7 @@ describe('Expense Report with new Lunch Category', () => {
   });
 });
 
+// TDD with new JSONReportFormatter feature
 describe('Expense Report with new JSONReportFormatter', () => {
   let formatter: JSONReportFormatter;
 
@@ -119,12 +111,6 @@ describe('Expense Report with new JSONReportFormatter', () => {
       new Expense(ExpenseType.DINNER, 6000),
       new Expense(ExpenseType.BREAKFAST, 800),
     ];
-    let report = formatter.generateHeader();
-    report += formatter.generateTableRow(expenses[0]);
-    // report += `,\n`;
-    report += formatter.generateTableRow(expenses[1]);
-    report += formatter.generateFooter(6800, 6800);
-
     const expectedReport = `{
   "date": "${getFormattedDate()}",
   "expenses": [
@@ -134,9 +120,18 @@ describe('Expense Report with new JSONReportFormatter', () => {
   "mealExpenses": 6800,
   "totalExpenses": 6800
 }`;
+
+    let report = formatter.generateHeader();
+    report += formatter.generateTableRow(expenses[0]);
+    // report += `,\n`;
+    report += formatter.generateTableRow(expenses[1]);
+    report += formatter.generateFooter(6800, 6800);
+
     expect(report).toBe(expectedReport);
   });
 });
+
+// All Tests
 
 // Unit Tests
 describe('Expense Class', () => {
@@ -323,20 +318,20 @@ describe('generateExpenseReport', () => {
 
   it('should print Plain Text report correctly', () => {
     const expenses = [
-      new Expense(ExpenseType.DINNER, 500),
+      new Expense(ExpenseType.DINNER, 6000),
       new Expense(ExpenseType.BREAKFAST, 1000),
-      new Expense(ExpenseType.LUNCH, 2000),
+      new Expense(ExpenseType.LUNCH, 3000),
       new Expense(ExpenseType.CAR_RENTAL, 10000),
     ];
     const formatter = new PlainTextReportFormatter();
 
     const expectedOutput = `Expense Report: ${getFormattedDate()}
-Dinner        500
+Dinner        6000    X
 Breakfast     1000
-Lunch         2000    
+Lunch         3000    X    
 Car Rental    10000   
-Meal Expenses:  3500
-Total Expenses:   13500`;
+Meal Expenses:  10000
+Total Expenses:   20000`;
 
     // Execute the function to print the report
     generateExpenseReport(formatter, expenses);
@@ -350,7 +345,7 @@ Total Expenses:   13500`;
 
     // Ensure total expenses are correctly printed
     expect(consoleSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Total Expenses: 13500')
+      expect.stringContaining('Total Expenses: 20000')
     );
 
     // Normalize spaces by collapsing them and removing newlines
@@ -363,7 +358,7 @@ Total Expenses:   13500`;
 
   it('should print JSON report correctly', () => {
     const expenses = [
-      new Expense(ExpenseType.DINNER, 5000),
+      new Expense(ExpenseType.DINNER, 5001),
       new Expense(ExpenseType.BREAKFAST, 1000),
       new Expense(ExpenseType.LUNCH, 2000),
       new Expense(ExpenseType.CAR_RENTAL, 10000),
@@ -372,13 +367,13 @@ Total Expenses:   13500`;
     const expectedOutput = `{
   "date": "${getFormattedDate()}",
   "expenses": [
-    {"type": "Dinner", "amount": 5000, "overLimit": " "},
+    {"type": "Dinner", "amount": 5001, "overLimit": "X"},
     {"type": "Breakfast", "amount": 1000, "overLimit": " "},
     {"type": "Lunch", "amount": 2000, "overLimit": " "},
     {"type": "Car Rental", "amount": 10000, "overLimit": " "}
   ],
-  "mealExpenses": 8000,
-  "totalExpenses": 18000
+  "mealExpenses": 8001,
+  "totalExpenses": 18001
 }`;
 
     generateExpenseReport(formatter, expenses);
@@ -401,14 +396,14 @@ Total Expenses:   13500`;
     );
   });
 
-  it('should handle all expense categories with over and normal limits', () => {
+  it('should handle all expense categories with over and normal limits for Plain Text report', () => {
     const expenses = [
       new Expense(ExpenseType.DINNER, 5000),
-      new Expense(ExpenseType.DINNER, 6000),
+      new Expense(ExpenseType.DINNER, 5001),
       new Expense(ExpenseType.BREAKFAST, 500),
-      new Expense(ExpenseType.BREAKFAST, 2000),
+      new Expense(ExpenseType.BREAKFAST, 1001),
       new Expense(ExpenseType.LUNCH, 1500),
-      new Expense(ExpenseType.LUNCH, 3000),
+      new Expense(ExpenseType.LUNCH, 2001),
       new Expense(ExpenseType.CAR_RENTAL, 2000),
       new Expense(ExpenseType.CAR_RENTAL, 50000),
     ];
@@ -425,5 +420,86 @@ Total Expenses:   13500`;
         )
       );
     });
+  });
+
+  it('should handle all expense categories with over and normal limits for HTML report', () => {
+    const expenses = [
+      new Expense(ExpenseType.DINNER, 5000),
+      new Expense(ExpenseType.DINNER, 5001),
+      new Expense(ExpenseType.BREAKFAST, 500),
+      new Expense(ExpenseType.BREAKFAST, 1001),
+      new Expense(ExpenseType.LUNCH, 1500),
+      new Expense(ExpenseType.LUNCH, 2001),
+      new Expense(ExpenseType.CAR_RENTAL, 2000),
+      new Expense(ExpenseType.CAR_RENTAL, 50000),
+    ];
+    const formatter = new HtmlReportFormatter();
+    const expectedOutput = `<!DOCTYPE html>
+<html>
+<head>
+<title>Expense Report: ${getFormattedDate()}</title>
+</head>
+<body>
+<h1>Expense Report: ${getFormattedDate()}</h1>
+<table>
+<thead>
+<tr><th scope="col">Type</th><th scope="col">Amount</th><th scope="col">Over Limit</th></tr>
+</thead>
+<tbody>
+<tr><td>Dinner</td><td>5000</td><td> </td></tr>
+<tr><td>Dinner</td><td>5001</td><td>X</td></tr>
+<tr><td>Breakfast</td><td>500</td><td> </td></tr>
+<tr><td>Breakfast</td><td>1001</td><td>X</td></tr>
+<tr><td>Lunch</td><td>1500</td><td> </td></tr>
+<tr><td>Lunch</td><td>2001</td><td>X</td></tr>
+<tr><td>Car Rental</td><td>2000</td><td> </td></tr>
+<tr><td>Car Rental</td><td>50000</td><td> </td></tr>
+</tbody>
+</table>
+<p>Meal Expenses: 15003</p>
+<p>Total Expenses: 67003</p>
+</body>
+</html>`;
+
+    generateExpenseReport(formatter, expenses);
+    const actualOutput = consoleSpy.mock.calls[0][0];
+
+    // Check if the actual output contains the expected output
+    expect(actualOutput).toContain(expectedOutput);
+  });
+
+  it('should handle all expense categories with over and normal limits for JSON report', () => {
+    const expenses = [
+      new Expense(ExpenseType.DINNER, 5000),
+      new Expense(ExpenseType.DINNER, 5001),
+      new Expense(ExpenseType.BREAKFAST, 500),
+      new Expense(ExpenseType.BREAKFAST, 1001),
+      new Expense(ExpenseType.LUNCH, 1500),
+      new Expense(ExpenseType.LUNCH, 2001),
+      new Expense(ExpenseType.CAR_RENTAL, 2000),
+      new Expense(ExpenseType.CAR_RENTAL, 50000),
+    ];
+    const formatter = new JSONReportFormatter();
+    const expectedOutput = `{
+  "date": "${getFormattedDate()}",
+  "expenses": [
+    {"type": "Dinner", "amount": 5000, "overLimit": " "},
+    {"type": "Dinner", "amount": 5001, "overLimit": "X"},
+    {"type": "Breakfast", "amount": 500, "overLimit": " "},
+    {"type": "Breakfast", "amount": 1001, "overLimit": "X"},
+    {"type": "Lunch", "amount": 1500, "overLimit": " "},
+    {"type": "Lunch", "amount": 2001, "overLimit": "X"},
+    {"type": "Car Rental", "amount": 2000, "overLimit": " "},
+    {"type": "Car Rental", "amount": 50000, "overLimit": " "}
+  ],
+  "mealExpenses": 15003,
+  "totalExpenses": 67003
+}`;
+
+    generateExpenseReport(formatter, expenses);
+    const actualOutput = consoleSpy.mock.calls[0][0];
+
+    // Check if the actual output contains the expected output
+    expect(actualOutput).toContain(expectedOutput);
   });
 });

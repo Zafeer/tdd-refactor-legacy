@@ -5,6 +5,11 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
 ## Objectives
 
 - **Promote TDD Practices:** Encourage the habit of writing tests before implementing functionality.
+  1.  Use FIRST Principles
+  2.  Use Red-Green-Refactor
+  3.  Boundary Testing
+  4.  Triangulation
+  5.  Test Doubles
 - **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
 
 ## Contents

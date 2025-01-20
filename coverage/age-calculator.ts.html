@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for fizz-buzz.ts</title>
+    <title>Code coverage report for age-calculator.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> fizz-buzz.ts</h1>
+        <h1><a href="index.html">All files</a> age-calculator.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.7% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/17</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64.7% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/17</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -85,50 +85,50 @@
 <a name='L20'></a><a href='#L20'>20</a>
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
-<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L23'></a><a href='#L23'>23</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">interface FizzBuzz {
-  go(num: number): string;
-}
-&nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function isPrime(num: number): boolean {</span></span>
-<span class="cstat-no" title="statement not covered" >  if (num % 2 === 0 &amp;&amp; num &gt; 2) return false;</span>
-<span class="cstat-no" title="statement not covered" >  if (num % 7 === 0 &amp;&amp; num &gt; 7) return false;</span>
-<span class="cstat-no" title="statement not covered" >  if (num % 11 === 0 &amp;&amp; num &gt; 11) return false;</span>
-<span class="cstat-no" title="statement not covered" >  return true;</span>
-<span class="cstat-no" title="statement not covered" >}</span>
-&nbsp;
-export const createFizzBuzz = (): FizzBuzz =&gt; {
-  return {
-    go(num: number) {
-      if (num === 3) return 'FizzWhiz';
-      if (num % 15 === 0) return 'FizzBuzz';
-      if (num % 5 === 0) return 'Buzz';
-      if (num % 3 === 0) return 'Fizz';
-      return num.toString();
-    },
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export const ageCalculator = () =&gt; {
+  return function (birthDate: Date, targetDate: Date) {
+    const completedYears = targetDate.getFullYear() - birthDate.getFullYear();
+    if (birthDate.getMonth() &gt; targetDate.getMonth()) return completedYears - 1;
+    if (hasHadBirthday(birthDate, targetDate)) return completedYears;
+    return completedYears - 1;
   };
 };
+&nbsp;
+// function hasNotYedHadBirthday(birthDate: Date, targetDate: Date) {
+//   return (
+//     birthDate.getMonth() === targetDate.getMonth() &amp;&amp;
+//     birthDate.getDate() &gt; targetDate.getDate()
+//   );
+// }
+&nbsp;
+function hasHadBirthday(birthDate: Date, targetDate: Date) {
+  return !(
+    birthDate.getMonth() === targetDate.getMonth() &amp;&amp;
+    birthDate.getDate() &gt; targetDate.getDate()
+  );
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -136,7 +136,7 @@ export const createFizzBuzz = (): FizzBuzz =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-01-20T10:43:20.295Z
+                at 2025-01-20T10:49:20.564Z
             </div>
         <script src="prettify.js"></script>
         <script>

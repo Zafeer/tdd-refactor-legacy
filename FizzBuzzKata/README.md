@@ -2,7 +2,7 @@
 
 ## Objective
 
-The goal of this Kata is to implement the FizzBuzz problem using Test-Driven Development (TDD). The problem consists of creating a function that returns:
+The goal of this Kata is to implement the FizzBuzz problem using Test-Driven Development (TDD) using **Fake It and Triangulation**. The problem consists of creating a function that returns:
 
 - `Fizz` if the number is divisible by 3.
 - `Buzz` if the number is divisible by 5.

@@ -12,7 +12,8 @@ This repository is a collection of **Test-Driven Development (TDD) Katas** and *
   5.  Learning Tests
   6.  One to many
   7.  Triangulation
-  8.  Test Doubles
+  8.  Backout
+  9.  Test Doubles
 - **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
 
 ## Contents

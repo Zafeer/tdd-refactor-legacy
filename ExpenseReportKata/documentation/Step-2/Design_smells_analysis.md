@@ -117,9 +117,19 @@ The variable `mealOverExpensesMarker` is verbose and inconsistent with other con
 
 Inconsistent naming can confuse readers and reduce the code’s readability.
 
+## 10. Renaming Variables
+
+### Issue:
+
+The variable `printReport` does not signify what report the function is printing.
+
+### Why It’s a Smell:
+
+Incorrect naming can confuse readers and reduce the code’s readability.
+
 ---
 
-## 10. Lack of Type Safety for Limits
+## 11. Lack of Type Safety for Limits
 
 ### Issue:
 

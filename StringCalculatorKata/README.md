@@ -4,7 +4,7 @@ This README documents the approach and steps followed during the String Calculat
 
 ---
 
-## Approach Using a Class
+## Approach Leading to a Class
 
 ### Initial Setup
 

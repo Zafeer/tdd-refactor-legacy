@@ -1,6 +1,6 @@
 # Expense Report Generator Kata
 
-This kata focuses on improving and extending a legacy codebase while maintaining functionality and ensuring test coverage. The repository for the legacy code is available [here](https://github.com/christianhujer/expensereport-level-2).
+This kata focuses on improving and extending a legacy codebase while maintaining functionality and ensuring test coverage. The original repository for the legacy code kata is available [here](https://github.com/christianhujer/expensereport-level-2).
 This project is focused on handling different types of expense and generating detailed expense reports in multiple formats, including plain text, HTML, and JSON, while ensuring modularity, maintainability, and extensibility of the codebase.
 
 ## Objective

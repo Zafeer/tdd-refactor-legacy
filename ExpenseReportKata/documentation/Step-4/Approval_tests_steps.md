@@ -40,7 +40,7 @@ When designing tests for the `printReport` functionality, keep the following pri
      expect(mockStdoutWrite.mock.calls.join('')).toMatchSnapshot();
      mockStdoutWrite.mockRestore();
      ```
-   - This approach allows you to monitor what is printed without modifying the core logic.
+   - This approach allows us to monitor what is printed without modifying the core logic.
 
 3. **Normalize Date or Inject Static Date**:
    - To prevent dynamic changes in test results caused by varying dates, adopt one of the following strategies:

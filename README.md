@@ -1,12 +1,11 @@
-# Refactor-Legacy + TDD
+# Refactor-Legacy + TDD (New and Existting Code)
 
-This repository is a collection of **Test-Driven Development (TDD) Katas** and **Legacy Refactoring Katas**, designed to sharpen skills in writing clean, maintainable, and testable code. The repository is structured to cater to both beginners and experienced developers looking to refine their coding and refactoring techniques.
+This repository is a collection of **Test-Driven Development (TDD) Katas** and **Legacy Refactoring Katas**, designed to write clean, maintainable, and testable code.
 
 ## Objectives
 
 - **Promote TDD Practices:** Encourage the habit of writing tests before implementing functionality.
 - **Refactor Legacy Code:** Improve the structure and quality of existing codebases without changing their external behavior.
-- **Enhance Problem-Solving Skills:** Provide hands-on exercises to tackle real-world coding challenges.
 
 ## Contents
 
@@ -20,9 +19,9 @@ These exercises are aimed at practicing TDD principles by building solutions inc
 - **EvenDigit Kata**
 - **RockPaperScissors Kata**
 
-### 2. Legacy Refactoring Katas
+### 2. Legacy Refactoring Kata
 
-These exercises focus on improving poorly written code while preserving functionality. Examples include:
+This excercise focusses on improving poorly written code while preserving functionality. Examples include:
 
 - **Expense Report Generator Kata**
 
@@ -47,7 +46,7 @@ These exercises focus on improving poorly written code while preserving function
    Navigate to the desired kata directory and follow the README for specific instructions.
 
 4. **Write Tests:**
-   Start by writing failing tests, implement functionality, and refactor iteratively.
+   Start by writing approval tests(if legacy), failing tests, implement functionality, and refactor iteratively.
 
 5. **Run Tests:**
    Use vitest to verify your solution:
@@ -56,5 +55,3 @@ These exercises focus on improving poorly written code while preserving function
    ```
 
 ---
-
-Start practicing and make your code cleaner, more testable, and maintainable!
